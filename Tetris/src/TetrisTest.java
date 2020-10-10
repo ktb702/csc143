@@ -4,30 +4,37 @@ import org.junit.jupiter.api.Test;
 
 public class TetrisTest {
 
+	//tests for scenarios not possible when you play the game 
+	//one test to check the removal of a row
+	//another test to check the movement of the piece (does canMove work correctly, does the piece move to the correct place)?
+	
 	@Test
 	void testCheckRows() {
 		Grid g = new Grid();
-		for(int row; row < Grid.HEIGHT; row++) {
-			for(int col; col < Grid.WIDTH; col++) {
-				g.set(row, col, Color.MAGENTA);				
+		//nested for loops will completely fill up the grid 
+		for (int row=0; row < Grid.HEIGHT; row++) {
+			for(int col=0; col < Grid.WIDTH; col++) {
+				if(row != 10 || col == 5 || col == 6) { //sets everything except row 10, cols 5 and 6 (2 squares)
+					g.set(row,  col,  Color.MAGENTA);
+				}
 			}
 		}
-		
-		g.checkRows(); //clear rows
-		
-		for(int row; row < Grid.HEIGHT; row++) {
-			for(int col; col < Grid.WIDTH; col++) {
-				assertFalse(g.isSet(row, col));			
+		g.checkRows();
+		//after calling that function the grid should be empty
+		//check that the row is empty
+		for (int row=0; row < Grid.HEIGHT; row++) {
+			for(int col=0; col < Grid.WIDTH; col++) {
+				if (row < Grid.HEIGHT -1 || col != 5 || col != 6) {
+					assertFalse(g.isSet(row, col)); //isSet returns true if there is a square set on the grid at that location
+				}
 			}
 		}
-		
 	}
 	
-	//create a test to see if piece moves left
-	
-	//create a test to see if a piece moves right
-	
-	//create a test to see if the row clears when full
+//	@Test
+//	void testCheckMoveLeft{
+//		//
+//	}
 	
 	public static void main(String[] args) {
 		
