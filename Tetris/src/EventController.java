@@ -43,7 +43,8 @@ public class EventController extends KeyAdapter implements ActionListener {
 	/**
 	 * Responds to special keys being pressed.
 	 * 
-	 * Currently just responds to the space key and the q(uit) key
+	 * Currently just responds to left, right, and down arrow keys as well 
+	 *   as the space bar.
 	 */
 	public void keyPressed(KeyEvent e) {
 		// if 'Q', quit the game

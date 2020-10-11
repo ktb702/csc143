@@ -20,8 +20,6 @@ import java.awt.Graphics;
 public class Grid {
 	private Square[][] board;
 
-	private int counter = 0;
-
 	// Width and Height of Grid in number of squares
 	public static final int HEIGHT = 20;
 
@@ -77,6 +75,10 @@ public class Grid {
 	public void set(int row, int col, Color c) {
 		board[row][col].setColor(c);
 	}
+	
+	public Color get(int row, int col) {
+		return board[row][col].getColor();
+	}
 
 	/**
 	 * Checks for and remove all solid rows of squares.
@@ -88,17 +90,15 @@ public class Grid {
 		//starting at the bottom row loop through each row to see if it's full
 	    for(int row = HEIGHT-1; row >= 0; row--) {
 	        if (isFull(row)) {
-	            //System.out.println("full" + row);
 	            clearRow(row);      
 	        }
 	    }
 	}
 	
 	private boolean isFull(int row) {
-		//loop through each square in the column to see if it's empty
-	    for (int col = 0; col < WIDTH-1; col++) {
+		//loop through each column in that row to see if it's empty
+	    for (int col = 0; col < WIDTH; col++) {
 	         if(board[row][col].getColor().equals(EMPTY)) {
-	             //System.out.println(board[row][col] + "... " + row + ", " + col);
 	             return false; //if empty return false
 	         }
 	    }   
@@ -115,6 +115,7 @@ public class Grid {
 		for (int r = row; r > 0; r--) {
 			//System.out.println("r = " + r);
 			for (int c = 0; c < WIDTH; c++) {
+				//System.out.println("current square = " + board[r][c].getColor() + "square above = " + board[r-1][c].getColor());
 				board[r][c].setColor(board[r-1][c].getColor());
 			}
 		}
