@@ -6,6 +6,11 @@ public class MyShape extends AbstractShape {
 		
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void draw(Graphics g) {
+		
+		
+	}
 
 }
 
