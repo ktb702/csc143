@@ -28,7 +28,7 @@ public abstract class AbstractShape implements Shape {
 			return true;
 		}
 		else {
-			// need code to add level
+			// need code to add a level
 			return addLevel();
 		}
 	}
@@ -37,7 +37,7 @@ public abstract class AbstractShape implements Shape {
 		if (children == null) {
 			return false;
 		} else {
-			// need code to remove level
+			// need code to remove a level
 			return true;
 		}
 	}
