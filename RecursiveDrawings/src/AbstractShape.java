@@ -28,12 +28,18 @@ public abstract class AbstractShape implements Shape {
 			return true;
 		}
 		else {
+			// need code to add level
 			return addLevel();
 		}
 	}
 	
 	public boolean removeLevel() {
-		return false;
+		if (children == null) {
+			return false;
+		} else {
+			// need code to remove level
+			return true;
+		}
 	}
 	
 	public int countShapes() {
