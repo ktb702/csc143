@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class AbstractShape implements Shape {
+public abstract class AbstractShape implements Shape {
 	protected int level;
 	protected int maxLevel;
 	protected AbstractShape[] children;
@@ -14,45 +14,46 @@ public class AbstractShape implements Shape {
 	// Alternatively the fields may be initialized in the concrete class constructors (they are visible by
 	// the concrete classes since they are declared protected) 
 	
-	/** 
-	 * 
-	 */
 	public AbstractShape() {
 		
+		
+	}
+    	public void draw(Graphics g) {
+        // TODO Auto-generated method stub
+
+    	}
+	
+	public boolean addLevel() {
+		if (children == null) {
+			return true;
+		}
+		else {
+			return addLevel();
+		}
 	}
 	
-	/**
-	 * 
-	 */
-	void draw(Graphics g) {
+	public boolean removeLevel() {
+		return false;
+	}
+	
+	public int countShapes() {
+		if (level == 1) {
+			return 1;
+		}
+		// only works for sierpinski triangle now
+		else {
+			level --;
+			return 1 + 3 * countShapes();
+		}
+	}
+	
+	public void update(int value) {
 		
 	}
 	
-	/**
-	 * 
-	 */
-	boolean addLevel() {
-		
-	}
+	public abstract void createChildren();
 	
-	/**
-	 * 
-	 */
-	boolean removeLevel() {
-		
-	}
 	
-	/**
-	 * 
-	 */
-	int countShapes() {
-		
-	}
 	
-	/**
-	 * 
-	 */
-	void update(int value) {
-		
-	}
+	
 }
