@@ -20,18 +20,19 @@ public abstract class AbstractShape implements Shape {
 	 */
 	public boolean addLevel() {
 		//base case
-		if (maxLevel == level) {
-			//we can only add levels as long as the max level has not been reached
-			return false;
-		} else if(children[0] == null) {
+		if (children[0] == null) {
+			if (maxLevel != level) { // can only add more level if the max level has not been reached
 				createChildren();
 				return true;
+			}
 		} else { //recursion
 			// loop over the children and ask each one to add children to their shapes
 			for(int i = 0; i < children.length; i++) {
-				children[i].addLevel();
+				if (children[i].addLevel()) {
+					return true;
+				}
 			}
-			return true;
+			return false;
 		}
 	}
 
@@ -47,7 +48,9 @@ public abstract class AbstractShape implements Shape {
 		} else { //recursion
 			// loop over the children and ask each one to remove children from their shapes
 			for(int i = 0; i < children.length; i++) {
-				children[i].removeLevel();
+				if (!children[i].removeLevel()) {
+					return false;
+				}
 			}
 			return true;
 		}
