@@ -76,5 +76,9 @@ public abstract class AbstractShape implements Shape {
 	 * This method will be implemented in the concrete shape classes and will fill the array of children. 
 	 */
 	public abstract void createChildren();
+	
+	public  static Point midPoint(Point p1, Point p2) {
+		return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+	}
 
 }
