@@ -62,6 +62,10 @@ public class SierpinskiTriangle extends AbstractShape {
 		children[1] = new SierpinskiTriangle(mp2, mp3, leg_2);
 		children[2] = new SierpinskiTriangle(mp1, mp2, peak);
 	}
+	
+	public  static Point midPoint(Point p1, Point p2) {
+		return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+	}
 
 	/**
 	 * EXTRA CREDIT
