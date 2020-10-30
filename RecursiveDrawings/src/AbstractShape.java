@@ -19,66 +19,65 @@ public abstract class AbstractShape implements Shape {
 	 * returns true if the operation was successful or false if the maximum level has been reached. 
 	 */
 	public boolean addLevel() {
-		//base case
+		
 		if (children[0] == null) {
-			if (maxLevel != level) { // can only add more level if the max level has not been reached
+			if (level != maxLevel) {
 				createChildren();
 				return true;
+			} else {
+				return false;
 			}
-		} else { //recursion
-			// loop over the children and ask each one to add children to their shapes
-			for(int i = 0; i < children.length; i++) {
-				if (children[i].addLevel()) {
-					return true;
-				}
-			}
-			return false;
-		}
-	}
-
-	/**
-	 * Removes a level from this shape.
-	 * 
-	 * Returns true if the operation was successful or false if the shape was at level 1.
-	 */
-	public boolean removeLevel() {
-		//base case: no grandchildren
-		if (children[0] != null && children[0].children[0] == null) {
-			return false;
-		} else { //recursion
-			// loop over the children and ask each one to remove children from their shapes
-			for(int i = 0; i < children.length; i++) {
-				if (!children[i].removeLevel()) {
-					return false;
-				}
+		} else {
+			for (int i = 0; i < children.length; i++) {
+				children[i].addLevel(); 	
 			}
 			return true;
 		}
 	}
 
+	
+	/**
+	 * Removes a level from this shape.
+	 * 
+	 * Returns true if the operation was successful or false if the 
+	 * shape was at level 1.
+	 */
+	public boolean removeLevel() {
+		if (children[0] != null) {
+			if (children[0].children[0] == null) {
+				children[0] = null;
+				return true;
+			} else {
+				for (int i = 0; i < children.length; i++) {
+					children[0].removeLevel();
+				}
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * This method is called from FractalDisplay every time the mouse is right clicked on a shape
 	 * 
 	 * returns the total number of shapes of this shape at the current level.
 	 */
 	public int countShapes() {
-		if (level == 1) {
+		int count = 0;
+		if (children[0] == null) {
 			return 1;
 		}
-		// only works for sierpinski triangle now
 		else {
-			level--;
-			return 1 + children.length * countShapes();
-		}
+			for (int i = 0; i < children.length; i++) {
+				count = 1 + children[i].countShapes();			
+			}
+		} return count;
 	}
 
 	/**
 	 * This method will be implemented in the concrete shape classes and will fill the array of children. 
 	 */
 	public abstract void createChildren();
-	
-	public  static Point midPoint(Point p1, Point p2) {
-		return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
-	}
 
 }
