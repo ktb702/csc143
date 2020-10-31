@@ -45,14 +45,15 @@ public abstract class AbstractShape implements Shape {
 	public boolean removeLevel() {
 		if (children[0] != null) {
 			if (children[0].children[0] == null) {
-				children[0] = null;
-				return true;
-			} else {
 				for (int i = 0; i < children.length; i++) {
-					children[0].removeLevel();
+					children[i] = null;
 				}
 				return true;
-			}
+			} 
+				for (int i = 0; i < children.length; i++) {
+					children[i].removeLevel();
+				}
+				return true;
 		} else {
 			return false;
 		}
