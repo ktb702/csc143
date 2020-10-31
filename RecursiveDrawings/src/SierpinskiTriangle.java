@@ -9,27 +9,34 @@ public class SierpinskiTriangle extends AbstractShape {
 	private static int maxLevel = 10;
 	private static int length = 3;
 	
-	 private int height = (int) Math.round(800 / 1.35);        
-     
-     Point peak = new Point(800 / 2, 0);
-     Point leg_1 = new Point(800, height);
-     Point leg_2 = new Point(0, height);
+	Point p1, p2, p3;
+	
+	// Creates first triangle
+	public SierpinskiTriangle() {
+    		super(maxLevel, length);
+    	
+    	
+    	
+    		int height = (int) Math.round(800 / 1.35);
+    	
+        	Point p_1 = new Point(800 / 2, 0);
+        	Point p_2 = new Point(800, height);
+        	Point p_3 = new Point(0, height);
+       
+        
+        	sierpinskiTriangle = new Polygon(new int[] {p_1.x, p_2.x, p_3.x}, new int[] {p_1.y, p_2.y, p_3.y}, 3);
+    }
 	
 
-
-	public SierpinskiTriangle(Point p1, Point p2, Point p3) {
+	// Creates other triangles
+	public SierpinskiTriangle(Point new_p1, Point new_p2, Point new_p3) {
 		super(maxLevel, length);
-		// TODO Auto-generated constructor stub
-    
-        // Triangle's peak
-//        sierpinskiTriangle.addPoint(peak.x, peak.y);
-//        // Legs
-//        sierpinskiTriangle.addPoint(leg_1.x, leg_1.y);
-//        sierpinskiTriangle.addPoint(leg_2.x, leg_2.y);
-//        
-        sierpinskiTriangle = new Polygon(new int[] {p1.x, p2.x, p3.x}, new int[] {p1.y, p2.y, p3.y}, 3);
-        
-
+		
+		p1 = new_p1;
+		p2 = new_p2;
+		p3 = new_p3;
+		
+        	sierpinskiTriangle = new Polygon(new int[] {p1.x, p2.x, p3.x}, new int[] {p1.y, p2.y, p3.y}, 3);
     }
 
 	/**
@@ -37,16 +44,15 @@ public class SierpinskiTriangle extends AbstractShape {
 	 */
 	public void draw(Graphics g) {
 		
-    	g.setColor(Color.green);
-        g.drawPolygon(sierpinskiTriangle);
+    		g.setColor(Color.green);
+        	g.drawPolygon(sierpinskiTriangle);
         
-        if (children[0] != null) {
-        	for (int i = 0; i < children.length; i++) {
-        		children[i].draw(g);
-        		//g.drawPolygon(new int[] {mp1.x, mp2.x, mp3.x}, new int[] {mp1.y, mp2.y, mp3.y}, 3);
-        	}
-        }
-    }
+        	if (children[0] != null) {
+        		for (int i = 0; i < children.length; i++) {
+        			children[i].draw(g);
+			}
+       		}	
+    	}
     
     /**
      * Creates children for this shape
@@ -54,13 +60,13 @@ public class SierpinskiTriangle extends AbstractShape {
 	@Override
 	public void createChildren() {
 		
-		Point mp1 = midPoint(peak,leg_1);
-		Point mp2 = midPoint(peak, leg_2);
-		Point mp3 = midPoint(leg_1, leg_2);
+		Point mp1 = midPoint(p1,p2);
+		Point mp2 = midPoint(p2, p3);
+		Point mp3 = midPoint(p3, p1);
 		
-		children[0] = new SierpinskiTriangle(mp1, mp3, leg_1);
-		children[1] = new SierpinskiTriangle(mp2, mp3, leg_2);
-		children[2] = new SierpinskiTriangle(mp1, mp2, peak);
+		children[0] = new SierpinskiTriangle(p2, mp1, mp2);
+		children[1] = new SierpinskiTriangle(p1, mp1, mp3);
+		children[2] = new SierpinskiTriangle(mp3, mp2, p3);
 	}
 	
 	public  static Point midPoint(Point p1, Point p2) {
