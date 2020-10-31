@@ -71,7 +71,7 @@ public abstract class AbstractShape implements Shape {
 		}
 		else {
 			for (int i = 0; i < children.length; i++) {
-				count = 1 + children[i].countShapes();			
+				count = 1 + children.length * children[i].countShapes();			
 			}
 		} return count;
 	}
