@@ -33,10 +33,6 @@ import javax.swing.event.ChangeListener;
  */
 
 public class FractalDisplay extends JPanel implements MouseListener, ActionListener, ChangeListener {
-	
-	Point peak = new Point(800 / 2, 0);
-    Point leg_1 = new Point(800, (int) Math.round(800 / 1.35));
-    Point leg_2 = new Point(0, (int) Math.round(800 / 1.35));
 
 
 	// Width of the inner panel
@@ -171,7 +167,7 @@ public class FractalDisplay extends JPanel implements MouseListener, ActionListe
 				// TODO
 				// Call your SierpinskiTriangle constructor here
 				// replace shape = null with shape = new SierpinskiTriangle(...)
-				shape = new SierpinskiTriangle(peak, leg_1, leg_2);
+				shape = new SierpinskiTriangle(HEIGHT);
 				break;
 			case H_SHAPE:
 				// TODO
@@ -183,7 +179,7 @@ public class FractalDisplay extends JPanel implements MouseListener, ActionListe
 				// TODO
 				// Call your MyShape constructor here
 				// Replace shape = null with shape = new MyShape(...))
-				shape = new MyShape();
+				shape = new MyShape(HEIGHT, WIDTH);
 				break;
 			}
 		} else if (e.getSource() == addLevel) {
