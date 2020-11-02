@@ -19,18 +19,19 @@ public abstract class AbstractShape implements Shape {
 	 * returns true if the operation was successful or false if the maximum level has been reached. 
 	 */
 	public boolean addLevel() {
-		
 		if (children[0] == null) {
-			if (level != maxLevel) {
-				createChildren();
-				return true;
-			} else {
-				return false;
-			}
-		} else {
+			createChildren();
+			level++;
+			return true;
+		} else if (level == maxLevel) {
+			System.out.println("return false from addLevel");
+			return false;
+		}else {
+			level++;
 			for (int i = 0; i < children.length; i++) {
 				children[i].addLevel(); 	
 			}
+			System.out.println("level after add" + level);
 			return true;
 		}
 	}
@@ -48,13 +49,18 @@ public abstract class AbstractShape implements Shape {
 				for (int i = 0; i < children.length; i++) {
 					children[i] = null;
 				}
+				level--;
+				System.out.println("level after remove" + level);
 				return true;
 			} 
-				for (int i = 0; i < children.length; i++) {
-					children[i].removeLevel();
-				}
-				return true;
+			for (int i = 0; i < children.length; i++) {
+				children[i].removeLevel();
+			}
+			level--;
+			System.out.println("level after remove" + level);
+			return true;
 		} else {
+			System.out.println("remove level = false");
 			return false;
 		}
 	}
