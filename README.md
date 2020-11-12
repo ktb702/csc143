@@ -6,3 +6,5 @@ Assignment #1 - Add code to the Tetris game to move the pieces left, right, and 
 Assignment #2 - Complete the Tetris game. In order to do this, the remaining 6 pieces need to be added to the game. The ability to rotate the pieces needs to be implemented also.
 
 Assignment #3 - Recursion. Create an application that draws fractal-like shapes using recursion. 
+
+Assignment #4 - Let the adventure begin! In this assignment we create a simple text-based adventure game. 
