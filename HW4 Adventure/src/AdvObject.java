@@ -25,39 +25,47 @@ import java.util.Scanner;
  */
 
 public class AdvObject extends AdvObjectStub {
+	
+	// name of this object
+	private String name;
+	// description of this object
+	private String description;
+	// room that the object originally located
+	private int initialLocation;
+	
 
-/* Method: getName() */
-/**
- * Returns the object name, which is the word used to refer to it.
- *
- * @usage String name = obj.getName();
- * @return The name of the object
- */
+	/* Method: getName() */
+	/**
+	 * Returns the object name, which is the word used to refer to it.
+	 *
+	 * @usage String name = obj.getName();
+	 * @return The name of the object
+	 */
 	public String getName() {
 		return super.getName(); // Replace with your code
 	}
 
-/* Method: getDescription() */
-/**
- * Returns the one-line description of the object.  This description
- * should start with an article, as in "a set of keys" or "an emerald
- * the size of a plover's egg."
- *
- * @usage String name = obj.getDescription();
- * @return The description of the object
- */
+	/* Method: getDescription() */
+	/**
+	 * Returns the one-line description of the object.  This description
+	 * should start with an article, as in "a set of keys" or "an emerald
+	 * the size of a plover's egg."
+	 *
+	 * @usage String name = obj.getDescription();
+	 * @return The description of the object
+	 */
 	public String getDescription() {
 		return super.getDescription(); // Replace with your code
 	}
 
 
-/* Method: getInitialLocation() */
-/**
- * Returns the initial location of the object.
- *
- * @usage int roomNumber = obj.getInitialLocation();
- * @return The room number in which the object initially resides
- */
+	/* Method: getInitialLocation() */
+	/**
+	 * Returns the initial location of the object.
+	 *
+	 * @usage int roomNumber = obj.getInitialLocation();
+	 * @return The room number in which the object initially resides
+	 */
 	public int getInitialLocation() {
 		return super.getInitialLocation(); // Replace with your code
 	}
@@ -75,10 +83,21 @@ public class AdvObject extends AdvObjectStub {
 	 * @return the object if an object is successfully read; null at end of file
 	 */
 	public static AdvObject readFromFile(Scanner scan) {
-		return AdvObjectStub.readFromFile(scan); // Replace with your code
+		//return AdvObjectStub.readFromFile(scan); // Replace with your code
+		
+		AdvObject object = new AdvObject();
+		
+		String line;
+		while (scan.hasNextLine() && (line = scan.nextLine()).trim().length() > 0) {
+			object.name = line;
+			object.description = scan.nextLine().trim();
+			object.initialLocation = scan.nextInt();
+			scan.nextLine();
+		}
+		return object;
 	}
 
-/* Private instance variables */
+	/* Private instance variables */
 	// Add your own instance variables here
 
 }
