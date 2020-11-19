@@ -52,7 +52,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public int getRoomNumber() {
 		return roomNumber;
-		//return super.getRoomNumber(); // Replace with your code
+//		return super.getRoomNumber(); // Replace with your code
 	}
 
 	/* Method: getName() */
@@ -64,7 +64,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public String getName() {
 		return name;
-		//return super.getName(); // Replace with your code
+//		return super.getName(); // Replace with your code
 	}
 
 	/* Method: getDescription() */
@@ -76,8 +76,20 @@ public class AdvRoom extends AdvRoomStub {
 	 * @return An array of strings giving the long description of the room
 	 */
 	public String[] getDescription() {
-		return description;
-		//return super.getDescription(); // Replace with your code
+//		return super.getDescription(); // Replace with your code
+
+		int i = 0;
+		String[] newDescription = new String[description.length + objects.size()];
+		
+		//foreach room description, add it to the new description
+		for (String s : description) {
+			newDescription[i++] = s;
+		}
+		//foreach object, add it to the description of the room
+		for (AdvObject o : objects) {
+			newDescription[i++] = "There is a " + o.getDescription() + " here.";
+		}
+		return newDescription;
 	}
 
 	/* Method: addObject(obj) */
@@ -90,7 +102,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public void addObject(AdvObject obj) {
 		objects.add(obj);
-		//super.addObject(obj);
+//		super.addObject(obj);
 	}
 
 	/* Method: removeObject(obj) */
@@ -103,7 +115,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public void removeObject(AdvObject obj) {
 		objects.remove(obj);
-		//super.removeObject(obj);
+//		super.removeObject(obj);
 	}
 
 	/* Method: containsObject(obj) */
@@ -117,7 +129,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public boolean containsObject(AdvObject obj) {
 		return objects.contains(obj);
-		//return super.containsObject(obj);
+//		return super.containsObject(obj);
 	}
 
 	/* Method: getObjectCount() */
@@ -129,7 +141,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public int getObjectCount() {
 		return objects.size();
-		//return super.getObjectCount();
+//		return super.getObjectCount();
 	}
 
 	/* Method: getObject(index) */
@@ -141,7 +153,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public AdvObject getObject(int index) {
 		return objects.get(index);
-		//return super.getObject(index);
+//		return super.getObject(index);
 	}
 
 	/* Method: setVisited(flag) */
@@ -157,7 +169,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public void setVisited(boolean flag) {
 		isVisited = flag;
-		//super.setVisited(flag); // Replace with your code
+//		super.setVisited(flag); // Replace with your code
 	}
 
 	/* Method: hasBeenVisited() */
@@ -169,7 +181,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public boolean hasBeenVisited() {
 		return isVisited;
-		//return super.hasBeenVisited(); // Replace with your code
+//		return super.hasBeenVisited(); // Replace with your code
 	}
 
 	/* Method: getMotionTable() */
@@ -183,7 +195,7 @@ public class AdvRoom extends AdvRoomStub {
 	 */
 	public AdvMotionTableEntry[] getMotionTable() {
 		return motionTable;
-		//return super.getMotionTable(); // Replace with your code
+//		return super.getMotionTable(); // Replace with your code
 	}
 
 	/* Method: readFromFile(rd) */
@@ -199,7 +211,8 @@ public class AdvRoom extends AdvRoomStub {
 	 * @return a room if successfully read; null if at end of file
 	 */
 	public static AdvRoom readFromFile(Scanner scan) {
-		//return AdvRoomStub.readFromFile(scan); // Replace with your code
+//		return AdvRoomStub.readFromFile(scan); // Replace with your code
+		
 		AdvRoom room = new AdvRoom();
 		
 		// read the data for the room number
@@ -226,6 +239,7 @@ public class AdvRoom extends AdvRoomStub {
 			list.add(entry);
 		}
 		room.motionTable = list.toArray(new AdvMotionTableEntry[list.size()]);
+		
 		return room;
 	}
 
