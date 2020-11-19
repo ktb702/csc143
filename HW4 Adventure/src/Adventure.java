@@ -16,6 +16,8 @@ public class Adventure extends AdventureStub {
 
 	// Use this scanner for any console input
 	private static Scanner scan = new Scanner(System.in);
+	
+	private SortedMap <Integer,AdvRoom> rooms = new TreeMap <Integer,AdvRoom>(); // should this be private or public?
 
 	/**
 	 * This method is used only to test the program
@@ -23,7 +25,12 @@ public class Adventure extends AdventureStub {
 	public static void setScanner(Scanner theScanner) {
 		scan = theScanner;
 		// Delete the following line when done
-		AdventureStub.setScanner(theScanner);
+		//AdventureStub.setScanner(theScanner);
+		
+		while (scan.hasNextInt()) {
+			AdvRoom a = AdvRoom.readFromFile(scan);
+			adventure.rooms.put(a.getRoomNumber(), a);
+		}
 	}
 
 	/**
