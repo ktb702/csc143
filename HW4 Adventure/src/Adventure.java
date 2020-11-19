@@ -37,7 +37,36 @@ public class Adventure extends AdventureStub {
 	 * Runs the adventure program
 	 */
 	public static void main(String[] args) {
-		AdventureStub.main(args); // Replace with your code
+		//AdventureStub.main(args); // Replace with your code
+		Adventure adventure = null;
+					
+		System.out.print("What will be your adventure today? ");
+		String game = scan.next();
+		if (game.toLowerCase().equals("crowther")) {
+			game = "CrowtherRooms.txt";
+		} else if (game.toLowerCase().equals("tiny")) {
+			game = "TinyRooms.txt";
+		} else if (game.toLowerCase().equals("small")) {
+			game = "SmallRooms.txt";
+		}
+		
+		try (Scanner scanner = new Scanner(new File(game))) {
+			adventure.setScanner(scanner);
+			AdvRoom currentroom = AdvRoom.readFromFile(scanner);
+			System.out.println(currentroom);
+			// first room  
+			AdvRoom currentRoom = adventure.rooms.get(adventure.rooms.firstKey());
+			while (true) {
+				System.out.print(currentRoom.getDescription());
+     			System.out.print("< ");
+//				String direction = scan.nextLine();
+//				
+//				AdvMotionTableEntry next = currentRoom.getMotionTable()[2];
+//				System.out.println(next);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Game could not be found. Sorry!");
+		}	
 	}
 
 	/* Method: executeMotionCommand(direction) */
