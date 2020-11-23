@@ -6,6 +6,7 @@
  */
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /* Class: AdvObject */
@@ -42,7 +43,8 @@ public class AdvObject extends AdvObjectStub {
 	 * @return The name of the object
 	 */
 	public String getName() {
-		return super.getName(); // Replace with your code
+//		return super.getName(); // Replace with your code
+		return name;
 	}
 
 	/* Method: getDescription() */
@@ -55,7 +57,8 @@ public class AdvObject extends AdvObjectStub {
 	 * @return The description of the object
 	 */
 	public String getDescription() {
-		return super.getDescription(); // Replace with your code
+//		return super.getDescription(); // Replace with your code
+		return description;
 	}
 
 
@@ -67,7 +70,8 @@ public class AdvObject extends AdvObjectStub {
 	 * @return The room number in which the object initially resides
 	 */
 	public int getInitialLocation() {
-		return super.getInitialLocation(); // Replace with your code
+//		return super.getInitialLocation(); // Replace with your code
+		return initialLocation;
 	}
 
 	/* Method: readFromFile(scan) */
@@ -83,10 +87,10 @@ public class AdvObject extends AdvObjectStub {
 	 * @return the object if an object is successfully read; null at end of file
 	 */
 	public static AdvObject readFromFile(Scanner scan) {
-		//return AdvObjectStub.readFromFile(scan); // Replace with your code
+//		return AdvObjectStub.readFromFile(scan); // Replace with your code
 		
 		AdvObject object = new AdvObject();
-		
+	
 		String line;
 		while (scan.hasNextLine() && (line = scan.nextLine()).trim().length() > 0) {
 			object.name = line;
