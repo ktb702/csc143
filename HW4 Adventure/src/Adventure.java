@@ -12,7 +12,7 @@ import java.util.*;
  * This class is the main program class for the Adventure game.
  */
 
-public class Adventure extends AdventureStub {
+public class Adventure {
 
 
 	/**
@@ -21,7 +21,7 @@ public class Adventure extends AdventureStub {
 	public static void setScanner(Scanner theScanner) {
 		scan = theScanner;
 		// Delete the following line when done
-		AdventureStub.setScanner(theScanner);
+		//AdventureStub.setScanner(theScanner);
 	}
 
 	/**
@@ -32,10 +32,11 @@ public class Adventure extends AdventureStub {
 		
 		Adventure adventure = new Adventure();
 		System.out.print("What will be your adventure today? ");
-		String gameName = scan.nextLine().trim();
+		String gameName = scan.nextLine().trim().toLowerCase();
+		gameName = gameName.substring(0, 1).toUpperCase() + gameName.substring(1);
 		
 		// Reads the room file
-		String roomFile = gameName.substring(0, 1).toUpperCase() + gameName.substring(1) + "Rooms.txt";
+		String roomFile = gameName + "Rooms.txt";
 		
 		try {
 			Scanner scanner = new Scanner(new File(roomFile));
@@ -49,39 +50,42 @@ public class Adventure extends AdventureStub {
 			return;
 		}	
 		
-		// Reads the objects file
-		String objectFile = gameName.substring(0, 1).toUpperCase() + gameName.substring(1) + "Objects.txt";
-		
-		try {
-			Scanner scanner = new Scanner(new File(objectFile));
+		if (!gameName.equals("Tiny")) {
 			
-			while (scanner.hasNextLine()) {
-				AdvObject a = AdvObject.readFromFile(scanner);
-				if (a != null) {
-					AdvRoom ad = adventure.rooms.get(a.getInitialLocation());
-					ad.addObject(a);
+			// Reads the objects file
+			String objectFile = gameName + "Objects.txt";
+			
+			try {
+				Scanner scanner = new Scanner(new File(objectFile));
+				
+				while (scanner.hasNextLine()) {
+					AdvObject a = AdvObject.readFromFile(scanner);
+					if (a != null) {
+						AdvRoom ad = adventure.rooms.get(a.getInitialLocation());
+						ad.addObject(a);
+					}
 				}
-			}
-		} catch (IOException e) {
-			System.out.println("The object file " + objectFile + "could not be read.");
-			return;
-		}	
-		
-		// Reads the synonyms file
-		String synonymFile = gameName.substring(0, 1).toUpperCase() + gameName.substring(1) + "Synonyms.txt";
-		
-		try {
-			Scanner scanner = new Scanner(new File(synonymFile));
+			} catch (IOException e) {
+				System.out.println("The object file " + objectFile + "could not be read.");
+				return;
+			}	
 			
-			String line;
-			while (scanner.hasNextLine() && (line = scanner.nextLine().trim()).length() > 0) {
-				String[] parts = line.split("=");
-				adventure.synonyms.put(parts[0], parts[1]);
-			}
-		} catch (IOException e) {
-			System.out.println("The synonyms file " + synonymFile + "could not be read.");
-			return;
-		}	
+			// Reads the synonyms file
+			String synonymFile = gameName + "Synonyms.txt";
+			
+			try {
+				Scanner scanner = new Scanner(new File(synonymFile));
+				
+				String line;
+				while (scanner.hasNextLine() && (line = scanner.nextLine().trim()).length() > 0) {
+					String[] parts = line.split("=");
+					adventure.synonyms.put(parts[0], parts[1]);
+				}
+			} catch (IOException e) {
+				System.out.println("The synonyms file " + synonymFile + "could not be read.");
+				return;
+			}	
+		}
 		adventure.run();
 	}
 	
@@ -89,60 +93,79 @@ public class Adventure extends AdventureStub {
 	public void run() {
 		// start with the first question
 		currentRoom = rooms.get(rooms.firstKey());
-		StringBuffer sb = new StringBuffer();
-      		for(int i = 0; i < currentRoom.getDescription().length; i++) {
-       			sb.append(currentRoom.getDescription()[i]);
-       			if (i < currentRoom.getDescription().length - 1) {
-      	 			sb.append(System.lineSeparator());
-       			}
-   		}
-    	String description = sb.toString();
-	System.out.println(description);
-	
-	while (true) {
-		System.out.print("> ");
-		String command = scan.nextLine().trim().toUpperCase();
-		String[] parts = command.split("\\s+");
+		String[] descriptionArray = currentRoom.getDescription();
+		for (int i = 0; i < descriptionArray.length; i++) {
+			System.out.println(descriptionArray[i]);
+		}		
 		
-		if (parts.length > 0) {
-			AdvCommand cmd = null;
-			AdvObject obj = null; // this is why take command returns null
-			// Look up for synonyms of the commands
-			String com = parts[0].toUpperCase();
-			if (com.length() == 1) {
-				com = synonyms.get(com);
+		while (true) {
+			if (quit) {
+				break;
 			}
+			System.out.print("> ");
+			String command = scan.nextLine().trim().toUpperCase();
+			String[] parts = command.split("\\s+");
 			
-			if (parts.length > 1) {	
+			if (parts.length > 0) {
+				AdvCommand cmd = null;
+				AdvObject obj = null; // this is why take command returns null
+				// Look up for synonyms of the commands
 				
-			}
-			switch (com) {
-			case "TAKE":
-				// take command
-				cmd = AdvCommand.TAKE;
-				break;
-			case "DROP":
-				// drop command
-				cmd = AdvCommand.DROP;
-				break;
-			case "HELP":
-				cmd = AdvCommand.HELP;
-				break;
-			case "LOOK":
-				cmd = AdvCommand.LOOK;
-				break;
-			case "INVENTORY":
-				cmd = AdvCommand.INVENTORY;
-				break;
-			case "QUIT":
-				cmd = AdvCommand.QUIT;
-				break;
-			default: // any motion command
-				cmd = new AdvMotionCommand(com);
-				break;
-			}
-			// execute the command
-			cmd.execute(this, obj);
+				String com = parts[0].toUpperCase();
+				if (synonyms.containsKey(com)) {
+					com = synonyms.get(com);
+				} 
+				if (!synonyms.isEmpty() && !synonyms.containsValue(com) && !synonyms.containsKey(com)) {
+					System.out.println("Unavailable command.");
+				} else {
+				
+					if (parts.length > 1) {	
+						String ss = parts[1].toUpperCase();
+						if (synonyms.containsKey(ss)) {
+							ss = synonyms.get(ss);
+						}
+						//ss = synonyms.get(ss);
+						
+						int c = currentRoom.getObjectCount();
+						AdvObject[] advo = new AdvObject[c];
+						for (int i = 0; i < advo.length; i++) {
+							advo[i] = currentRoom.getObject(i);
+						}
+						
+						for (AdvObject o : advo) {
+							if (o.getName().equals(ss)) {
+								obj = o;
+							} 
+						}
+					}
+					switch (com) {
+					case "TAKE":
+						// take command
+						cmd = AdvCommand.TAKE;
+						break;
+					case "DROP":
+						// drop command
+						cmd = AdvCommand.DROP;
+						break;
+					case "HELP":
+						cmd = AdvCommand.HELP;
+						break;
+					case "LOOK":
+						cmd = AdvCommand.LOOK;
+						break;
+					case "INVENTORY":
+						cmd = AdvCommand.INVENTORY;
+						break;
+					case "QUIT":
+						cmd = AdvCommand.QUIT;
+						break;
+					default: // any motion command
+						cmd = new AdvMotionCommand(com);
+						break;
+					}
+					// execute the command
+					cmd.execute(this, obj);
+				}
 			}
 		}
 	}
@@ -156,7 +179,40 @@ public class Adventure extends AdventureStub {
 	 *            The string indicating the direction of motion
 	 */
 	public void executeMotionCommand(String direction) {
-		super.executeMotionCommand(direction); // Replace with your code
+		int destinationRoom = 0;
+		boolean b = false;
+		AdvMotionTableEntry[] table = currentRoom.getMotionTable();
+		for (AdvMotionTableEntry t : table) {
+			if (t.getDirection().equals(direction)) {
+				b = true;
+//				if (t.getKeyName() != null) {
+//					for (AdvObject o : inventory) {
+//						if (o.getName().equals(t.getKeyName())) {
+//							destinationRoom = t.getDestinationRoom();
+//							currentRoom = rooms.get(destinationRoom); 
+//						}
+//						else {
+//							
+//						}
+//					}
+//				} else {
+					destinationRoom = t.getDestinationRoom();
+					currentRoom = rooms.get(destinationRoom); 
+					
+					String[] descriptionArray = currentRoom.getDescription();
+					for (int i = 0; i < descriptionArray.length; i++) {
+						System.out.println(descriptionArray[i]);
+					}	
+					b = true;
+					break;
+				//}
+			}
+		}
+		if (b) {
+			System.out.println("Unavailable direction.");
+		}
+			
+		//super.executeMotionCommand(direction); // Replace with your code
 	}
 
 	/* Method: executeQuitCommand() */
@@ -166,7 +222,14 @@ public class Adventure extends AdventureStub {
 	 * the program should continue as usual.
 	 */
 	public void executeQuitCommand() {
-		super.executeQuitCommand(); // Replace with your code
+		System.out.print("Are you sure (Y/N)? ");
+		String answer = scan.nextLine().trim().toUpperCase();
+		if (answer.equals("Y")) {
+			quit = true;
+		} else if (answer.equals("N")){
+			quit = false;
+		}
+		//super.executeQuitCommand(); // Replace with your code
 	}
 
 	/* Method: executeHelpCommand() */
@@ -175,7 +238,9 @@ public class Adventure extends AdventureStub {
 	 * the user.
 	 */
 	public void executeHelpCommand() {
-		super.executeHelpCommand(); // Replace with your code
+		System.out.println("List of all possible commands: ");
+
+		//super.executeHelpCommand(); // Replace with your code
 	}
 
 	/* Method: executeLookCommand() */
@@ -184,16 +249,10 @@ public class Adventure extends AdventureStub {
 	 * of the room and its contents.
 	 */
 	public void executeLookCommand() {
-		StringBuffer sb = new StringBuffer();
-	    	for(int i = 0; i < currentRoom.getDescription().length; i++) {
-	       		sb.append(currentRoom.getDescription()[i]);
-	       		if (i < currentRoom.getDescription().length - 1) {
-	      	 	sb.append(System.lineSeparator());
-	       		}
-	    	}
-	    	String description = sb.toString();
-		System.out.println(description);
-		currentRoom.getDescription();
+		String[] descriptionArray = currentRoom.getDescription();
+		for (int i = 0; i < descriptionArray.length; i++) {
+			System.out.println(descriptionArray[i]);
+		}	
 		//super.executeLookCommand(); // Replace with your code
 	}
 
@@ -221,10 +280,15 @@ public class Adventure extends AdventureStub {
 	 *            The AdvObject you want to take
 	 */
 	public void executeTakeCommand(AdvObject obj) {
+		
+		if (obj == null) {
+			System.out.println("There is no such object.");
+		}
 		if (currentRoom.containsObject(obj)) {
 			inventory.add(obj);
+			currentRoom.removeObject(obj);
 			System.out.println("Taken.");
-		} else {
+		} else if (obj != null) {
 			System.out.println("I don't see any " + obj.getName() + ".");
 		}
 		//super.executeTakeCommand(obj); // Replace with your code
@@ -239,10 +303,14 @@ public class Adventure extends AdventureStub {
 	 *            The AdvObject you want to drop
 	 */
 	public void executeDropCommand(AdvObject obj) {
+		if (obj == null) {
+			System.out.println("You don't have that object.");
+		}
 		if (inventory.contains(obj)) {
 			inventory.remove(obj);
+			currentRoom.addObject(obj);
 			System.out.println("Dropped.");
-		} else {
+		} else if (obj != null) {
 			System.out.println("You don't have any " + obj.getName() + " to drop.");
 		}
 		//super.executeDropCommand(obj); // Replace with your code
@@ -260,4 +328,6 @@ public class Adventure extends AdventureStub {
 	AdvRoom currentRoom;
 	// Use this scanner for any console input
 	private static Scanner scan = new Scanner(System.in);
+	
+	private boolean quit;
 }
