@@ -180,41 +180,27 @@ public class Adventure {
 	 */
 	public void executeMotionCommand(String direction) {
 		int destinationRoom = 0;
-		boolean b = false;
+		boolean availableDirection = false;
 		AdvMotionTableEntry[] table = currentRoom.getMotionTable();
 		for (AdvMotionTableEntry t : table) {
 			if (t.getDirection().equals(direction)) {
-				b = true;
-//				if (t.getKeyName() != null) {
-//					for (AdvObject o : inventory) {
-//						if (o.getName().equals(t.getKeyName())) {
-//							destinationRoom = t.getDestinationRoom();
-//							currentRoom = rooms.get(destinationRoom); 
-//						}
-//						else {
-//							
-//						}
-//					}
-//				} else {
-					destinationRoom = t.getDestinationRoom();
-					currentRoom = rooms.get(destinationRoom); 
-					
-					String[] descriptionArray = currentRoom.getDescription();
-					for (int i = 0; i < descriptionArray.length; i++) {
-						System.out.println(descriptionArray[i]);
-					}	
-					b = true;
-					break;
-				//}
+				availableDirection = true;
+				destinationRoom = t.getDestinationRoom();
+				currentRoom = rooms.get(destinationRoom); 
 			}
 		}
-		if (b) {
+		if (!availableDirection) {
 			System.out.println("Unavailable direction.");
-		}
-			
-		//super.executeMotionCommand(direction); // Replace with your code
+		} else {
+			String[] descriptionArray = currentRoom.getDescription();
+			for (int i = 0; i < descriptionArray.length; i++) {
+				System.out.println(descriptionArray[i]);
+			}	
+		}	
 	}
 
+	
+	
 	/* Method: executeQuitCommand() */
 	/**
 	 * Implements the QUIT command. This command should ask the user to confirm
