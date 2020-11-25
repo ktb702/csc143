@@ -1,0 +1,382 @@
+
+
+Testing Small
+
+
+What will be your adventure today? You are standing at the end of a road before a small brick
+building.  A small stream flows out of the building and
+down a gully to the south.  A road runs up a small hill
+to the west.
+> You are inside a building, a well house for a large spring.
+There is a set of keys here.
+> Taken.
+> Outside building
+> You are in a valley in the forest beside a stream tumbling
+along a rocky bed.  The stream is flowing to the south.
+> At your feet all the water of the stream splashes into a
+two-inch slit in the rock.  To the south, the streambed is
+bare rock.
+> You are in a 25-foot depression floored with bare dirt.
+Set into the dirt is a strong steel grate mounted in
+concrete.  A dry streambed leads into the depression from
+the north.
+> You are in a small chamber beneath a 3x3 steel grate to
+the surface.  A low crawl over cobbles leads inward to
+the west.
+There is a brightly shining brass lamp here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+> You are crawling over cobbles in a low east/west passage.
+There is a dim light to the east.
+> You are in a debris room filled with stuff washed in from
+the surface.  A low wide passage with cobbles becomes
+plugged with mud and debris here, but an extremely narrow
+canyon leads upward and west.  Unfortunately, the passage
+is blocked by a barrier marked "Under Construction."
+There is a black rod with a rusty star here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+ROD: a black rod with a rusty star
+> Cobble crawl
+> Dropped.
+> KEYS: a set of keys
+ROD: a black rod with a rusty star
+> It is now pitch dark.  If you proceed you will likely fall
+into a pit.
+> You fell into a pit and broke every bone in your body!
+
+
+Testing Crowther
+
+
+What will be your adventure today? You are standing at the end of a road before a small brick
+building.  A small stream flows out of the building and
+down a gully to the south.  A road runs up a small hill
+to the west.
+> You are inside a building, a well house for a large spring.
+The exit door is to the south.  There is another room to
+the north, but the door is barred by a shimmering curtain.
+There is a set of keys here.
+There is a bottle of water here.
+> Taken.
+> Outside building
+> You are in a valley in the forest beside a stream tumbling
+along a rocky bed.  The stream is flowing to the south.
+> At your feet all the water of the stream splashes into a
+two-inch slit in the rock.  To the south, the streambed is
+bare rock.
+> You are in a 20-foot depression floored with bare dirt.
+Set into the dirt is a strong steel grate mounted in
+concrete.  A dry streambed leads into the depression from
+the north.
+> You are in a small chamber beneath a 3x3 steel grate to
+the surface.  A low crawl over cobbles leads inward to
+the west.
+There is a brightly shining brass lamp here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+> You are crawling over cobbles in a low east/west passage.
+There is a dim light to the east.
+> You are in a debris room filled with stuff washed in from
+the surface.  A low wide passage with cobbles becomes
+plugged with mud and debris here, but an extremely narrow
+canyon leads upward and west.  Carved on the wall is the
+message: "Magic Word XYZZY".
+There is a black rod with a rusty star here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+ROD: a black rod with a rusty star
+> Cobble crawl
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+ROD: a black rod with a rusty star
+> Debris room
+> Inside building
+> Debris room
+> You are in an awkward sloping east/west canyon.
+> You are in a splendid chamber thirty feet high.  The walls
+are frozen rivers of orange stone.  A narrow canyon and a
+good passage exit from east and west sides of the chamber.
+High in the cavern, you see a little bird flying around
+the rocks.  It takes one look at the black rod and quickly
+flies out of sight.
+> At your feet is a small pit breathing traces of white mist.
+An east passage ends here except for a small crack leading
+on.  Rough stone steps lead into the pit.
+> Dropped.
+> You are in a splendid chamber thirty feet high.  The walls
+are frozen rivers of orange stone.  A narrow canyon and a
+good passage exit from east and west sides of the chamber.
+There is a little bird here.
+> You are in a splendid chamber thirty feet high.  The walls
+are frozen rivers of orange stone.  A narrow canyon and a
+good passage exit from east and west sides of the chamber.
+There is a little bird here.
+> Taken.
+> Top of pit
+> Taken.
+> The crack is far too small for you to follow.
+Top of pit
+> You are at one end of a vast hall stretching forward out of
+sight to the west.  The hall is filled with wisps of white
+mist swaying to and fro almost as if alive.  There are
+passages to the north and south, and a stone stairway
+leads upward.
+> This is a low room with a crude note on the wall.  The
+note says, "You won't get it up the steps."
+There is a nugget of gold here.
+> This is a low room with a crude note on the wall.  The
+note says, "You won't get it up the steps."
+There is a nugget of gold here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+BIRD: a little bird
+ROD: a black rod with a rusty star
+NUGGET: a nugget of gold
+> Hall of mists
+> An unseen force blocks your way and a ghostly voice echoes:
+"You won't get it up the steps."
+Hall of mists
+> You are on the east bank of a fissure slicing clear across
+the hall.  The mist is quite thick here.
+> As you wave the rod, a cascade of crystalline sparks issues
+from its tip which gain shape and substance over the chasm.
+In moments, a shimmering crystal bridge spans the fissure.
+After you cross, the bridge fades into nothingness.
+You are on the west side of the fissure in the Hall of
+Mists.
+There is a sparkling diamond here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+BIRD: a little bird
+ROD: a black rod with a rusty star
+NUGGET: a nugget of gold
+DIAMOND: a sparkling diamond
+> The fissure looks too wide to cross.
+West bank of fissure
+> You are at the west end of Hall of Mists.  A low wide
+crawl exits north.  To the south is a little passage
+six feet off the floor that seems to twist sharply.
+> You are in a long passageway that curves from the east
+to the south.
+> You are in the West Side Chamber of the Hall of the
+Mountain King.  A passage continues west and up here.
+> Long curving passage
+> West side chamber
+> You are in the Hall of the Mountain King, with passages off
+in several directions.
+> You are in the East Side Chamber of the Hall of the
+Mountain King.
+There is a bag of coins here.
+> Taken.
+> KEYS: a set of keys
+LAMP: a brightly shining brass lamp
+BIRD: a little bird
+ROD: a black rod with a rusty star
+NUGGET: a nugget of gold
+DIAMOND: a sparkling diamond
+COINS: a bag of coins
+> Hall of the Mountain King
+> You are in a low N/S passage with a hole in the floor.
+> You are in an E/W passage.  There is a hole in the
+ceiling above that appears to open into a passage.
+> You're in a small chamber lit by an eerie green light that
+seems to emanate from an extremely narrow crack to the
+north.  A dark corridor leads west.
+> Dropped.
+> Dropped.
+> Dropped.
+> Dropped.
+> You're in a small chamber whose walls are studded with
+glowing green gemstones.  A narrow crack leads south.
+There is an emerald the size of a plover's egg here.
+> Taken.
+> Green chamber
+> Taken.
+> Taken.
+> Taken.
+> Taken.
+> KEYS: a set of keys
+ROD: a black rod with a rusty star
+DIAMOND: a sparkling diamond
+EMERALD: an emerald the size of a plover's egg
+BIRD: a little bird
+COINS: a bag of coins
+LAMP: a brightly shining brass lamp
+NUGGET: a nugget of gold
+> E/W passage
+> Low N/S passage
+> Hall of the Mountain King
+> Hall of mists
+> East bank of fissure
+> As you wave the rod, a cascade of crystalline sparks issues
+from its tip which gain shape and substance over the chasm.
+In moments, a shimmering crystal bridge spans the fissure.
+After you cross, the bridge fades into nothingness.
+West bank of fissure
+> West end of the Hall of Mists
+> You are in a maze of twisty little passages, all alike.
+> You are in a maze of twisty little passages, all alike.
+> You are in a maze of twisty little passages, all alike.
+> You are in a maze of twisty little passages, all alike.
+> You're in the pirate's lair deep in the maze.  The only
+exit is south.
+There is a pirate chest here.
+> Taken.
+> KEYS: a set of keys
+ROD: a black rod with a rusty star
+DIAMOND: a sparkling diamond
+EMERALD: an emerald the size of a plover's egg
+BIRD: a little bird
+COINS: a bag of coins
+LAMP: a brightly shining brass lamp
+NUGGET: a nugget of gold
+CHEST: a pirate chest
+> You are in a maze of twisty little passages, all alike.
+> You are on the brink of a thirty-foot pit with a massive
+orange column down one wall.  You could climb down here
+but you could not get back up.  The maze continues at
+this level.
+> Chamber of orange stone
+> Sloping canyon
+> Debris room
+> Inside building
+> You are in a large room, with a passage to the south,
+a passage to the west, and a wall of broken rock to the
+east.  There is a large "Y2" on a rock in the room's
+center.  As you enter, a hollow voice says "PLUGH".
+> Low N/S passage
+> E/W passage
+> You are at the east end of the Twopit Room.  The floor
+here is littered with thin rock slabs, which make it easy
+to descend the pits.  There is a path here bypassing the
+pits to connect passages from east and west.  There are
+holes all over, but the only big one is in the roof
+directly over the west pit where you can't get to it.
+> You are at the west end of the Twopit Room.  There is
+a large hole above the pit at this end of the room.
+> You are at the bottom of the western pit in the Twopit
+Room underneath a large hole in the ceiling.
+There is a small plant murmuring "Water, water" here.
+> Taken.
+> KEYS: a set of keys
+ROD: a black rod with a rusty star
+DIAMOND: a sparkling diamond
+EMERALD: an emerald the size of a plover's egg
+BIRD: a little bird
+COINS: a bag of coins
+LAMP: a brightly shining brass lamp
+NUGGET: a nugget of gold
+CHEST: a pirate chest
+PLANT: a small plant murmuring "Water, water"
+> West end of Twopit Room
+> You are in a circular chamber about 25 feet across.  The
+floor is covered by white mist seeping in from the north.
+The walls extend upward for well over 100 feet.  Suspended
+from some unseen point far above you, an enormous two-sided
+mirror is hanging parallel to and midway between the canyon
+walls.  A small window can be seen in the wall some fifty
+feet up.  The canyon has exits to the north and east.
+> West end of Twopit Room
+> West pit
+> Dropped.
+> As you water the plant, it bursts into violent growth,
+quickly filling the entire pit and pushing you upward
+toward the hole in ceiling.  You scramble for your life
+and manage to catch hold of the rock and pull yourself to
+safety.  The plant then shrinks away as quickly as it grew.
+You are in the Giant Room.  The ceiling here is too high
+up for your lamp to show it.  A cavernous passage leads
+north.  There is a hole in the floor through which you
+can see the Twopit room far below.
+There is a nest of golden eggs here.
+> Taken.
+> KEYS: a set of keys
+ROD: a black rod with a rusty star
+DIAMOND: a sparkling diamond
+EMERALD: an emerald the size of a plover's egg
+BIRD: a little bird
+COINS: a bag of coins
+LAMP: a brightly shining brass lamp
+NUGGET: a nugget of gold
+CHEST: a pirate chest
+EGGS: a nest of golden eggs
+> You are in a magnificent cavern with a rushing stream,
+which cascades over a sparkling waterfall into a roaring
+whirlpool that disappears through a hole in the floor.
+A passage exits to the south.
+> You are dragged down, down, into the depths of the
+whirlpool.  Just as you can no longer hold your breath,
+you are shot out over a waterfall into the shallow end
+of a large reservoir.  Gasping and sputtering, you crawl
+weakly towards the shore.
+You are at the edge of a large underground reservoir.
+An opaque cloud of white mist fills the room and rises
+rapidly upward.  The lake is fed by a stream, which
+tumbles out of a hole in the wall about ten feet
+overhead and splashes noisily into the water somewhere
+within the mist.  The only exit is to the south.
+> Mirror room
+> West end of Twopit Room
+> East end of Twopit Room
+> E/W passage
+> Low N/S passage
+> You're at "Y2"
+> Low N/S passage
+> Hall of the Mountain King
+> Hall of mists
+> As you enter the chamber, you see a fierce green snake.
+Before you can think, the little bird flies from your
+shoulder, attacks the green snake, and in an astounding
+flurry drives the snake away.  The bird then flies back.
+Hall of the Mountain King
+> Low N/S passage
+> You're at "Y2"
+> KEYS: a set of keys
+ROD: a black rod with a rusty star
+DIAMOND: a sparkling diamond
+EMERALD: an emerald the size of a plover's egg
+BIRD: a little bird
+COINS: a bag of coins
+LAMP: a brightly shining brass lamp
+NUGGET: a nugget of gold
+CHEST: a pirate chest
+EGGS: a nest of golden eggs
+> Dropped.
+> Inside building
+> You can pass through this curtain only if you're carrying
+all the treasures.  You don't yet have all six.
+Inside building
+> You're at "Y2"
+> Taken.
+> As you utter the magic word, your surroundings begin
+to fade in and out.  After a protracted struggle, you
+hear a hollow voice say, "It's just too heavy."
+You're at "Y2"
+> Low N/S passage
+> Hall of the Mountain King
+> Hall of mists
+> East bank of fissure
+> As you wave the rod, a cascade of crystalline sparks issues
+from its tip which gain shape and substance over the chasm.
+In moments, a shimmering crystal bridge spans the fissure.
+After you cross, the bridge fades into nothingness.
+West bank of fissure
+> West end of the Hall of Mists
+> You are in a maze of twisty little passages, all alike.
+> You are in a maze of twisty little passages, all alike.
+> You are in a maze of twisty little passages, all alike.
+> You are in a maze of twisty little passages, all alike.
+> Brink of pit in the maze
+> Chamber of orange stone
+> Sloping canyon
+> Debris room
+> Inside building
+> > You have collected all the treasures and are admitted to
+the Adventurer's Hall of Fame.  Congratulations!
