@@ -12,8 +12,8 @@ import java.util.*;
  * This class is the main program class for the Adventure game.
  */
 
-public class Adventure {
-
+public class Adventure extends AdventureStub {
+	
 
 	/**
 	 * This method is used only to test the program
@@ -21,8 +21,9 @@ public class Adventure {
 	public static void setScanner(Scanner theScanner) {
 		scan = theScanner;
 		// Delete the following line when done
-		//AdventureStub.setScanner(theScanner);
+//		AdventureStub.setScanner(theScanner);		
 	}
+	
 
 	/**
 	 * Runs the adventure program
@@ -169,6 +170,7 @@ public class Adventure {
 			}
 		}
 	}
+	
 
 	/* Method: executeMotionCommand(direction) */
 	/**
@@ -180,27 +182,32 @@ public class Adventure {
 	 */
 	public void executeMotionCommand(String direction) {
 		int destinationRoom = 0;
-		boolean availableDirection = false;
 		AdvMotionTableEntry[] table = currentRoom.getMotionTable();
 		for (AdvMotionTableEntry t : table) {
+			//check to see if it's possible to go that direction
 			if (t.getDirection().equals(direction)) {
-				availableDirection = true;
 				destinationRoom = t.getDestinationRoom();
-				currentRoom = rooms.get(destinationRoom); 
+				currentRoom = rooms.get(destinationRoom);
+
 			}
 		}
-		if (!availableDirection) {
-			System.out.println("Unavailable direction.");
-		} else {
+		
+		//if the room has not been visited before, display the long description and set flag to true
+		if(!(currentRoom.hasBeenVisited())) {
 			String[] descriptionArray = currentRoom.getDescription();
 			for (int i = 0; i < descriptionArray.length; i++) {
 				System.out.println(descriptionArray[i]);
 			}	
-		}	
+			currentRoom.setVisited(true);
+		} else { //if room has already been visited, display the short description
+			System.out.println(">"+currentRoom.getName());
+		}
+		
+	
+		//super.executeMotionCommand(direction); // Replace with your code
 	}
+	
 
-	
-	
 	/* Method: executeQuitCommand() */
 	/**
 	 * Implements the QUIT command. This command should ask the user to confirm
@@ -218,22 +225,28 @@ public class Adventure {
 		//super.executeQuitCommand(); // Replace with your code
 	}
 
+	
 	/* Method: executeHelpCommand() */
 	/**
 	 * Implements the HELP command. Your code must include some help text for
 	 * the user.
 	 */
 	public void executeHelpCommand() {
-		public void executeHelpCommand() {
-		System.out.println("Here are the possible directions for this room: ");
-		AdvMotionTableEntry[] table = currentRoom.getMotionTable();
-		System.out.print("+ Available directions: ");
-		for (AdvMotionTableEntry t : table) {
-			System.out.print(t.getDirection() + " ");
+		System.out.println("List of all possible commands: ");
+		System.out.println("TAKE: Pick up an object by typing 'take [object]' (e.g. take keys). ");
+		System.out.println("DROP: Remove an item from your inventory.");
+		System.out.println("LOOK: Displays the long description of the room you are in.");
+		System.out.println("INVENTORY: Shows what items are in your inventory.");
+		System.out.println("QUIT: Ends the game. \n" );
+		System.out.println("Or type a direction to move in. Available directions from this room are: ");
+		AdvMotionTableEntry[] motion = this.currentRoom.getMotionTable();
+		for (AdvMotionTableEntry m : motion) {
+			System.out.println(m.getDirection());
 		}
-		System.out.println();
+		//super.executeHelpCommand(); // Replace with your code
 	}
 
+	
 	/* Method: executeLookCommand() */
 	/**
 	 * Implements the LOOK command. This method should give the full description
@@ -243,10 +256,11 @@ public class Adventure {
 		String[] descriptionArray = currentRoom.getDescription();
 		for (int i = 0; i < descriptionArray.length; i++) {
 			System.out.println(descriptionArray[i]);
-		}	
+		}		
 		//super.executeLookCommand(); // Replace with your code
 	}
 
+	
 	/* Method: executeInventoryCommand() */
 	/**
 	 * Implements the INVENTORY command. This method should display a list of
@@ -259,9 +273,10 @@ public class Adventure {
 		for (AdvObject o : inventory) {
 			System.out.println(o.getName() + ": " + o.getDescription());
 		}
-		//super.executeInventoryCommand(); // Replace with your code
-	}
+//		super.executeInventoryCommand(); // Replace with your code 
+	}  
 
+	
 	/* Method: executeTakeCommand(obj) */
 	/**
 	 * Implements the TAKE command. This method should check that the object is
@@ -271,18 +286,14 @@ public class Adventure {
 	 *            The AdvObject you want to take
 	 */
 	public void executeTakeCommand(AdvObject obj) {
-		
-		if (obj == null) {
-			System.out.println("There is no such object.");
-		}
 		if (currentRoom.containsObject(obj)) {
 			inventory.add(obj);
-			currentRoom.removeObject(obj);
+			currentRoom.removeObject(obj); //remove object from the room
 			System.out.println("Taken.");
-		} else if (obj != null) {
-			System.out.println("I don't see any " + obj.getName() + ".");
+		} else {
+			System.out.println("I don't see any " + obj + ".");
 		}
-		//super.executeTakeCommand(obj); // Replace with your code
+//		super.executeTakeCommand(obj); // Replace with your code
 	}
 
 	/* Method: executeDropCommand(obj) */
@@ -294,14 +305,11 @@ public class Adventure {
 	 *            The AdvObject you want to drop
 	 */
 	public void executeDropCommand(AdvObject obj) {
-		if (obj == null) {
-			System.out.println("You don't have that object.");
-		}
 		if (inventory.contains(obj)) {
 			inventory.remove(obj);
-			currentRoom.addObject(obj);
+			currentRoom.addObject(obj); //put the object back into the room
 			System.out.println("Dropped.");
-		} else if (obj != null) {
+		} else {
 			System.out.println("You don't have any " + obj.getName() + " to drop.");
 		}
 		//super.executeDropCommand(obj); // Replace with your code
@@ -316,9 +324,10 @@ public class Adventure {
 	// map of synonyms for this room
 	private Map <String, String> synonyms = new HashMap <String, String>();
 	// the current room
-	AdvRoom currentRoom;
+	private AdvRoom currentRoom;
 	// Use this scanner for any console input
 	private static Scanner scan = new Scanner(System.in);
 	
 	private boolean quit;
+	
 }
