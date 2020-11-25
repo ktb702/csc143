@@ -224,9 +224,14 @@ public class Adventure {
 	 * the user.
 	 */
 	public void executeHelpCommand() {
-		System.out.println("List of all possible commands: ");
-
-		//super.executeHelpCommand(); // Replace with your code
+		public void executeHelpCommand() {
+		System.out.println("Here are the possible directions for this room: ");
+		AdvMotionTableEntry[] table = currentRoom.getMotionTable();
+		System.out.print("+ Available directions: ");
+		for (AdvMotionTableEntry t : table) {
+			System.out.print(t.getDirection() + " ");
+		}
+		System.out.println();
 	}
 
 	/* Method: executeLookCommand() */
