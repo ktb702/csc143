@@ -109,7 +109,7 @@ public class Adventure extends AdventureStub {
 			
 			if (parts.length > 0) {
 				AdvCommand cmd = null;
-				AdvObject obj = null; // this is why take command returns null
+				AdvObject obj = null; 
 				// Look up for synonyms of the commands
 				
 				String com = parts[0].toUpperCase();
@@ -188,7 +188,6 @@ public class Adventure extends AdventureStub {
 			if (t.getDirection().equals(direction)) {
 				destinationRoom = t.getDestinationRoom();
 				currentRoom = rooms.get(destinationRoom);
-
 			}
 		}
 		
@@ -200,9 +199,14 @@ public class Adventure extends AdventureStub {
 			}	
 			currentRoom.setVisited(true);
 		} else { //if room has already been visited, display the short description
-			System.out.println(">"+currentRoom.getName());
+			System.out.println(currentRoom.getName());
 		}
 		
+		//if the next direction is forced, automatically go to the next room by calling
+		//executeMotionCommand again. 
+        if (currentRoom.getMotionTable()[0].getDirection().equals("FORCED")) {
+        	executeMotionCommand("FORCED");
+        }
 	
 		//super.executeMotionCommand(direction); // Replace with your code
 	}
