@@ -94,6 +94,7 @@ public class Adventure extends AdventureStub {
 	public void run() {
 		// start with the first question
 		currentRoom = rooms.get(rooms.firstKey());
+		currentRoom.setVisited(true); //set the first room to has been visited
 		String[] descriptionArray = currentRoom.getDescription();
 		for (int i = 0; i < descriptionArray.length; i++) {
 			System.out.println(descriptionArray[i]);
@@ -107,20 +108,33 @@ public class Adventure extends AdventureStub {
 			String command = scan.nextLine().trim().toUpperCase();
 			String[] parts = command.split("\\s+");
 			
-			if (parts.length > 0) {
+			if (parts.length > 0) { //command only
 				AdvCommand cmd = null;
 				AdvObject obj = null; 
-				// Look up for synonyms of the commands
-				
 				String com = parts[0].toUpperCase();
+				boolean isPossible = false;
+				
+				int destinationRoom = 0;
+				AdvMotionTableEntry[] table = currentRoom.getMotionTable();
+				for (AdvMotionTableEntry t : table) {
+					//check to see if it's possible to go that direction
+					if (t.getDirection().equals(com)) {
+						destinationRoom = t.getDestinationRoom();
+						currentRoom = rooms.get(destinationRoom);
+						isPossible = true;
+					}
+				}
+				
+				// Look up for synonyms of the commands
+
 				if (synonyms.containsKey(com)) {
 					com = synonyms.get(com);
 				} 
-				if (!synonyms.isEmpty() && !synonyms.containsValue(com) && !synonyms.containsKey(com)) {
+				if (!synonyms.isEmpty() && !isPossible && !synonyms.containsValue(com)) {// && !synonyms.containsKey(com)) {
 					System.out.println("Unavailable command.");
 				} else {
 				
-					if (parts.length > 1) {	
+					if (parts.length > 1) {	//command and object
 						String ss = parts[1].toUpperCase();
 						if (synonyms.containsKey(ss)) {
 							ss = synonyms.get(ss);
