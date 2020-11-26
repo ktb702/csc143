@@ -94,12 +94,14 @@ public class Adventure extends AdventureStub {
 	public void run() {
 		// start with the first question
 		currentRoom = rooms.get(rooms.firstKey());
-		currentRoom.setVisited(true); //set the first room to has been visited
 		String[] descriptionArray = currentRoom.getDescription();
 		for (int i = 0; i < descriptionArray.length; i++) {
 			System.out.println(descriptionArray[i]);
-		}		
+		}	
+		// Set visit status for the first room
+		currentRoom.setVisited(true);
 		
+		// Playing the game until the user wants to quit
 		while (true) {
 			if (quit) {
 				break;
@@ -108,51 +110,46 @@ public class Adventure extends AdventureStub {
 			String command = scan.nextLine().trim().toUpperCase();
 			String[] parts = command.split("\\s+");
 			
-			if (parts.length > 0) { //command only
+			if (parts.length > 0) {
 				AdvCommand cmd = null;
 				AdvObject obj = null; 
-				String com = parts[0].toUpperCase();
-				boolean isPossible = false;
 				
-				int destinationRoom = 0;
+				// Look up for synonyms of the commands or directions
+				String com = parts[0].toUpperCase();
+				if (synonyms.containsKey(com)) {
+					com = synonyms.get(com);
+				} 
+				// Check if the direction entered is available for the current room
+				boolean isPossible = false;
 				AdvMotionTableEntry[] table = currentRoom.getMotionTable();
 				for (AdvMotionTableEntry t : table) {
 					//check to see if it's possible to go that direction
 					if (t.getDirection().equals(com)) {
-						destinationRoom = t.getDestinationRoom();
-						currentRoom = rooms.get(destinationRoom);
 						isPossible = true;
 					}
 				}
-				
-				// Look up for synonyms of the commands
-
-				if (synonyms.containsKey(com)) {
-					com = synonyms.get(com);
-				} 
-				if (!synonyms.isEmpty() && !isPossible && !synonyms.containsValue(com)) {// && !synonyms.containsKey(com)) {
-					System.out.println("Unavailable command.");
-				} else {
-				
-					if (parts.length > 1) {	//command and object
-						String ss = parts[1].toUpperCase();
-						if (synonyms.containsKey(ss)) {
-							ss = synonyms.get(ss);
+				// Only process the commands and directions if possible
+				if (com.equals("TAKE") || com.equals("DROP") || com.equals("QUIT") || com.equals("HELP") || 
+				    com.equals("INVENTORY") || com.equals("LOOK") || isPossible) {
+					// There is an object to look at
+					if (parts.length > 1) {	
+						// Process the object entered by the player
+						String object = parts[1].toUpperCase();
+						if (synonyms.containsKey(object)) {
+							object = synonyms.get(object);
 						}
-						//ss = synonyms.get(ss);
-						
 						int c = currentRoom.getObjectCount();
 						AdvObject[] advo = new AdvObject[c];
 						for (int i = 0; i < advo.length; i++) {
 							advo[i] = currentRoom.getObject(i);
 						}
-						
 						for (AdvObject o : advo) {
-							if (o.getName().equals(ss)) {
+							if (o.getName().equals(object)) {
 								obj = o;
 							} 
 						}
 					}
+					// Execute the commands or directions
 					switch (com) {
 					case "TAKE":
 						// take command
@@ -180,6 +177,10 @@ public class Adventure extends AdventureStub {
 					}
 					// execute the command
 					cmd.execute(this, obj);
+				} 
+				// Print to the screen if there is no commands or directions as listed
+				else {
+					System.out.println("Unavailable command.");
 				}
 			}
 		}
