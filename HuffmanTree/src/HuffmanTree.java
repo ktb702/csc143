@@ -2,6 +2,8 @@ import java.io.PrintStream;
 
 public class HuffmanTree {
 
+	private HuffmanNode overallRoot;
+	
 	/**
 	 * HuffmanTree constructor
 	 * Constructs a HuffmanTree using the given array of frequencies where
@@ -11,22 +13,46 @@ public class HuffmanTree {
 	 *    of each character in a file. Has exactly 256 values. 
 	 */
 	public HuffmanTree(int[] count) {
-		//use count.length instead of depending on the array being 256 values.
-		//use a priority queue to build up the tree.
-		//first, add a leaf node(HuffmanNode?) for each character that has a frequency greater than 0,
-		//   added increasing order (char 0, char 1, etc)
+		PriorityQueue <HuffmanNode> pQ = new PriorityQueue <HuffmanNode> ();
 		
-		//use PriorityQueue<E> class that implements the Queue<E> interface to build the tree.
-		//offer method used to "enqueue" and remove method to "dequeue". 
-		//Also has isEmpty() and size() method available.
+		for (int i = 1; i < count.length; i++) {
+			if (count[i] > 0) {
+				HuffmanNode node = null;
+				node.frequency = count[i];
+				node.ascii = i;
+				pQ.offer(node);
+			}
+		}
 		
-		//turn these leaf nodes into a single tree
-		//while not a single tree - remove 2 values from the priority queue and combine to make a new branch node,
-		//  which we put back into the queue. continue combining until you get one tree (HuffmanTree).
-			
-		//write code to create a fictitious end of file character. 
-		//Value will be one higher than the highest value of chars in the frequency array passed to the constructor. 
-		//manually add this to the priority queue, and will have a frequency of 1.
+		while (pQ.size() >= 2) {
+			HuffmanNode node1 = pQ.poll();
+			HuffmanNode node2 = pQ.poll();
+			pQ.offer(new HuffmanNode(node1, node2));
+		}
+	}
+	
+	
+	
+	// inner class to describe a Huffman Node
+	private class HuffmanNode implements Comparable <HuffmanNode> {
+		public int frequency;
+		public int ascii;
+		public HuffmanNode left, right;
+		
+		public HuffmanNode(HuffmanNode n1, HuffmanNode n2) {
+			this.left = n1;
+			this.right = n2;
+			this.frequency = n1.frequency + n2.frequency;
+		}
+		
+		/**
+		 * Returns < 0 if the frequency of this node is < frequency of h
+		 * Returns 0 if the frequency of this node is == frequency of h
+		 * Returns > 0 if the frequency of this node is > frequency of h
+		 */
+		public int compareTo(HuffmanNode h) {
+			return this.frequency - h.frequency;
+		}
 	}
 	
 	/**
