@@ -1,37 +1,104 @@
-import java.io.PrintStream;
+import java.io.*;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class HuffmanTree {
 
-	private HuffmanNode overallRoot;
+	private HuffmanNode overallRoot; //root node of the HuffmanTree
 	
 	/**
 	 * HuffmanTree constructor
 	 * Constructs a HuffmanTree using the given array of frequencies where
 	 *   count[i] is the number of occurrences of the character with ASCII value i.
-	 * 
+	 * Used by MakeCode.java
 	 * @param count - integer array that contains the frequency 
 	 *    of each character in a file. Has exactly 256 values. 
 	 */
 	public HuffmanTree(int[] count) {
-		PriorityQueue <HuffmanNode> pQ = new PriorityQueue <HuffmanNode> ();
+		//create the priority queue
+		PriorityQueue<HuffmanNode> pQ = new PriorityQueue<HuffmanNode>();
 		
+		//create a HuffmanNode for each character that has a frequency greater than 0
 		for (int i = 1; i < count.length; i++) {
 			if (count[i] > 0) {
-				HuffmanNode node = null;
-				node.frequency = count[i];
-				node.ascii = i;
+//				HuffmanNode node = null;
+//				node.frequency = count[i];
+//				node.ascii = i;
+				HuffmanNode node = new HuffmanNode(i, count[i], null, null);
 				pQ.offer(node);
 			}
 		}
 		
+		//turn these leaf nodes into a single tree
+		//while not a single tree - remove 2 values from the priority queue and combine to make a new branch node,
+		//  which we put back into the queue. continue combining until you get one tree (HuffmanTree).
 		while (pQ.size() >= 2) {
-			HuffmanNode node1 = pQ.poll();
+			HuffmanNode node1 = pQ.poll(); //should be remove instead of poll?
 			HuffmanNode node2 = pQ.poll();
-			pQ.offer(new HuffmanNode(node1, node2));
+			pQ.offer(new HuffmanNode(-1, node1.frequency + node2.frequency, node1, node2)); //add combined node to the queue
+		}
+			
+		//write code to create a fictitious end of file character. 
+		//Value will be one higher than the highest value of chars in the frequency array passed to the constructor. 
+		//manually add this to the priority queue, and will have a frequency of 1.
+		HuffmanNode eof = new HuffmanNode(count.length, 1, null, null);
+		pQ.offer(eof);
+	}
+	
+	/**
+	 * Constructs a HuffmanTree from a scanner.
+	 * Assumes the Scanner contains a tree description in standard format.
+	 * Used by Decode.java
+	 * @param input
+	 */
+	public HuffmanTree(Scanner input) {
+		
+	}
+	
+	/**
+	 * Reads bits from the given input stream and writes the corresponding characters to the output. 
+	 * Stops reading when it encounters a character with value equal to eof. This is a pseudo-eof character,
+	 * so it should not be written to the output file. 
+	 * 
+	 * Assumes input stream contains a legal encoding of characters for this tree's Huffman code.
+	 * @param input
+	 * @param output
+	 * @param eof
+	 * @return 
+	 */
+	public void decode(BitInputStream input, PrintStream output, int eof) {
+		
+	}
+	
+	/**
+	 * Writes the current tree to the given output stream in standard format.
+	 * @param output
+	 */
+	void write(PrintStream output) {
+		if(overallRoot != null) {
+			toFile(overallRoot, output, "");
 		}
 	}
 	
-	
+	/**
+	 * helper function to write output to file
+	 * 	each character should produce 2 lines of code in traversal order:
+	 *1st line: ASCII value of the character. 2nd line: code(0s and 1s) or the char with this ASCII value
+	 * @param overallRoot
+	 * @param output
+	 * @param ascii
+	 */
+	void toFile(HuffmanNode root, PrintStream output, String code) {
+		//base case - we are at the top of the tree
+		 if (root == null) { 
+	         output.println(root.ascii);
+	         output.println(code);
+	      } else { //otherwise traverse the tree and update the code
+	    	 toFile(root.left, output, code + "0");
+	    	 toFile(root.right, output, code + "1"); 
+	      }
+	}
+
 	
 	// inner class to describe a Huffman Node
 	private class HuffmanNode implements Comparable <HuffmanNode> {
@@ -39,10 +106,10 @@ public class HuffmanTree {
 		public int ascii;
 		public HuffmanNode left, right;
 		
-		public HuffmanNode(HuffmanNode n1, HuffmanNode n2) {
+		public HuffmanNode(int ascii, int frequency, HuffmanNode n1, HuffmanNode n2) {
 			this.left = n1;
 			this.right = n2;
-			this.frequency = n1.frequency + n2.frequency;
+			this.frequency = frequency; //n1.frequency + n2.frequency;
 		}
 		
 		/**
@@ -53,19 +120,6 @@ public class HuffmanTree {
 		public int compareTo(HuffmanNode h) {
 			return this.frequency - h.frequency;
 		}
-	}
-	
-	/**
-	 * Writes the current tree to the given output stream in standard format.
-	 * @param output
-	 */
-	void write(PrintStream output) {
-		//each character should produce 2 lines of code:
-		//1st line: ASCII value of the character. 2nd line: code(0s and 1s) or the char with this ASCII value
-		
-		//write in traversal order (order that the standard traversal of the tree would visit them).
-		
-
 	}
 	
 }
