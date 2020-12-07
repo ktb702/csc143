@@ -120,6 +120,13 @@ public class HuffmanTree {
 		public int compareTo(HuffmanNode h) {
 			return this.frequency - h.frequency;
 		}
+		
+		public boolean hasLeft() {
+			return this.left != null;
+		}
+		
+		public boolean hasRight() {
+			return this.right != null;
+		}
 	}
-	
 }
