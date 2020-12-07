@@ -75,9 +75,9 @@ public class HuffmanTree {
 	 * @param output
 	 */
 	void write(PrintStream output) {
-		if(overallRoot != null) {
+// 		if(overallRoot != null) {
 			toFile(overallRoot, output, "");
-		}
+		//}
 	}
 	
 	/**
@@ -90,12 +90,12 @@ public class HuffmanTree {
 	 */
 	void toFile(HuffmanNode root, PrintStream output, String code) {
 		//base case - we are at the top of the tree
-		 if (root == null) { 
-	         output.println(root.ascii);
-	         output.println(code);
+		 if (root != null && !root.hasLeft() && !root.hasRight()) { 
+			 output.println(root.ascii);
+			 output.println(code);
 	      } else { //otherwise traverse the tree and update the code
-	    	 toFile(root.left, output, code + "0");
-	    	 toFile(root.right, output, code + "1"); 
+			 toFile(root.left, output, code + "0");
+			 toFile(root.right, output, code + "1"); 
 	      }
 	}
 
