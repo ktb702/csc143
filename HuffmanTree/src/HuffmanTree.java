@@ -24,7 +24,7 @@ public class HuffmanTree {
 //				HuffmanNode node = null;
 //				node.frequency = count[i];
 //				node.ascii = i;
-				HuffmanNode node = new HuffmanNode(i, count[i], null, null);
+				HuffmanNode node = new HuffmanNode(i, count[i]);
 				pQ.offer(node);
 			}
 		}
@@ -41,7 +41,7 @@ public class HuffmanTree {
 		//write code to create a fictitious end of file character. 
 		//Value will be one higher than the highest value of chars in the frequency array passed to the constructor. 
 		//manually add this to the priority queue, and will have a frequency of 1.
-		HuffmanNode eof = new HuffmanNode(count.length, 1, null, null);
+		HuffmanNode eof = new HuffmanNode(count.length, 1);
 		pQ.offer(eof);
 	}
 	
@@ -52,7 +52,41 @@ public class HuffmanTree {
 	 * @param input
 	 */
 	public HuffmanTree(Scanner input) {
-		
+		while (input.hasNextLine()) {
+			// scan for the input ascii value and code
+			int ascii = input.nextInt();
+			input.nextLine();
+			String code = input.nextLine();
+			
+			treeBuilding(overallRoot, ascii, code);
+		}
+	}
+	
+	/**
+	 * A helper function to create the Huffman tree from the Scanner
+	 * 
+	 * @param root
+	 * @param ascii
+	 * @param code
+	 * @return root
+	 */
+	private HuffmanNode treeBuilding(HuffmanNode root, int ascii, String code) {
+		if (root == null) {
+			root = new HuffmanNode(-1, 0);
+		} else if (code.length() == 1) {
+			if (code.equals("0")) {
+				root.left = new HuffmanNode(ascii, 0);
+			} else {
+				root.right = new HuffmanNode(ascii, 0);
+			}
+		} else {
+			if (code.charAt(0) == '0') {
+				treeBuilding(root.left, ascii, code.substring(1));
+			} else {
+				treeBuilding(root.right, ascii, code.substring(1));
+			}
+		}
+		return root;
 	}
 	
 	/**
@@ -106,10 +140,15 @@ public class HuffmanTree {
 		public int ascii;
 		public HuffmanNode left, right;
 		
+		public HuffmanNode(int ascii, int frequency) {
+			this(ascii, frequency, null, null);
+		}
+		
 		public HuffmanNode(int ascii, int frequency, HuffmanNode n1, HuffmanNode n2) {
 			this.left = n1;
 			this.right = n2;
 			this.frequency = frequency; //n1.frequency + n2.frequency;
+			this.ascii = ascii;
 		}
 		
 		/**
