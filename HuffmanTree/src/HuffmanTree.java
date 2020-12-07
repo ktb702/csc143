@@ -43,6 +43,9 @@ public class HuffmanTree {
 		//manually add this to the priority queue, and will have a frequency of 1.
 		HuffmanNode eof = new HuffmanNode(count.length, 1);
 		pQ.offer(eof);
+		
+		//now that we have gone through pQ and there is only one left, make that the overallRoot
+		overallRoot = pQ.poll(); //not sure if we should use poll or remove?
 	}
 	
 	/**
