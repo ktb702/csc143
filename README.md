@@ -8,3 +8,5 @@ Assignment #2 - Complete the Tetris game. In order to do this, the remaining 6 p
 Assignment #3 - Recursion. Create an application that draws fractal-like shapes using recursion. 
 
 Assignment #4 - Let the adventure begin! In this assignment we create a simple text-based adventure game. 
+
+Assignment #5 - We use binary trees and priority queues to create a Huffman coding tree. 
