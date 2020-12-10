@@ -26,18 +26,18 @@ public class HuffmanTree {
 			}
 		}
 		
+		//write code to create a fictitious end of file character. 
+		//Value will be one higher than the highest value of chars in the frequency array passed to the constructor. 
+		//manually add this to the priority queue, and will have a frequency of 1.
+		HuffmanNode endOfFile = new HuffmanNode(count.length, 1);
+		pQ.offer(endOfFile);
+		
 		while (pQ.size() >= 2) {
 			HuffmanNode node1 = pQ.poll();
 			HuffmanNode node2 = pQ.poll();
 			pQ.offer( new HuffmanNode(-1, node1.frequency + node2.frequency, node1, node2));
 		}
 		overallRoot = pQ.poll();
-		
-		//write code to create a fictitious end of file character. 
-		//Value will be one higher than the highest value of chars in the frequency array passed to the constructor. 
-		//manually add this to the priority queue, and will have a frequency of 1.
-		HuffmanNode endOfFile = new HuffmanNode(count.length, 1);
-		pQ.offer(endOfFile);
 	}
 	
 	
@@ -160,7 +160,23 @@ public class HuffmanTree {
 	 * @param charMax
 	 */
 	public void decode(BitInputStream input, PrintStream output, int charMax) {
-		// TODO Auto-generated method stub
+		int bit = input.readBit();
+		HuffmanNode node = overallRoot;
+
+		while (bit != -1) { //readBit returns -1 if at eof
+
+			if (node.hasRight() == false && node.hasLeft() == false && node.ascii == eof) {
+				bit = -1; //end the loop we are at eof
+			} else {
+				if (bit == 0) {
+					node = node.left;
+				} else {
+					node = node.right;
+				}
+				output.write(node.ascii);
+				bit = input.readBit();
+			}
+		}
 		
 	}
 	
