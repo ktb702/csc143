@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-
 public class HuffmanTree2 {
 
 	private HuffmanNode overallRoot; // root node of the HuffmanTree
@@ -58,10 +57,7 @@ public class HuffmanTree2 {
 	 * @param input
 	 */
 	public HuffmanTree2(BitInputStream input) {
-		// read the bits from the input for the ascii value
-		int data = readBit(input);
-
-		overallRoot = treeBuilding(overallRoot, data);
+		overallRoot = treeBuilding(input);
 	}
 
 	/**
@@ -72,17 +68,20 @@ public class HuffmanTree2 {
 	 * @param code
 	 * @return root
 	 */
-	private HuffmanNode treeBuilding(HuffmanNode root, int data) {
+	private HuffmanNode treeBuilding(BitInputStream input) {
 
-		if (root == null) { //base case
-			root = new HuffmanNode(-1, 0);
-		} else if (data == 0) { // if it's a branch node
-			root.left = treeBuilding(root.left, data);
-			root.right = treeBuilding(root.right, data);
+		int bit = input.readBit();
+		HuffmanNode node = new HuffmanNode(-1,0);
+//		if (root == null) { //base case
+//			root = new HuffmanNode(-1, 0);
+//		} else 
+		if (bit == 0) { // if it's a branch node
+			node.left = treeBuilding(input);
+			node.right = treeBuilding(input);
 		} else { // it's a leaf node
-			//do something with read9 ??
+			node.ascii = read9(input);
 		}
-		return root;
+		return node;
 	}
 
 	/**
@@ -93,7 +92,22 @@ public class HuffmanTree2 {
 	 * @param codes
 	 */
 	void assign(String[] codes) {
+		assignHelper(codes, overallRoot, "");
+		// for each index that has an ascii char, replace it with the huffman code
+	}
 
+	/**
+	 * Helper method to assign the codes for each character of the tree.
+	 */
+	void assignHelper(String[] codes, HuffmanNode root, String path) {
+		if (root != null) {
+			if (!root.hasLeft() && !root.hasRight()) { // if it's a leaf node
+				codes[root.ascii] = path;
+			} else { // it's a branch node
+				assignHelper(codes, root.left, path + "0");
+				assignHelper(codes, root.left, path + "1");
+			}
+		}
 	}
 
 	/**
@@ -105,18 +119,20 @@ public class HuffmanTree2 {
 	void writeHeader(BitOutputStream out) {
 		writeHelper(overallRoot, out);
 	}
-	
+
 	/**
 	 * helper method for write header
 	 */
 	void writeHelper(HuffmanNode root, BitOutputStream out) {
-		//if it's a leaf node
-		if(root != null && !root.hasLeft() && !root.hasRight()) {
-//			out.write9(out, 1); 
-		} else { //it's a branch node
-//			out.write9(out, 0);
-//			 call writeHelper again
+		// if it's a leaf node
+		if (root != null && !root.hasLeft() && !root.hasRight()) {
+			write9(out, 1);
+		} else { // else it's a branch node
+			write9(out, 0);
+			writeHelper(root.left, out);
+			writeHelper(root.right, out);
 		}
+
 	}
 
 	/**
@@ -152,10 +168,9 @@ public class HuffmanTree2 {
 	private int readBit(BitInputStream input) {
 		HuffmanNode node = overallRoot;
 
-		// while the leaf has not been reached, keep traversing the tree to the left or
-		// right
+		// while the leaf has not been reached, keep traversing the tree to the left or right
 		// depends on the bits read
-		while (node.ascii < 0) {
+		while (node.ascii != -1) {
 			int bit = input.readBit(); // read the bit
 			// traverse to the left if bit == 0
 			if (bit == 0) {
@@ -166,7 +181,7 @@ public class HuffmanTree2 {
 				node = node.right;
 			}
 		}
-		// return the ascii value of the leaf (no longer < 0 (-1))
+		// return the ascii value of the leaf (no longer = -1)
 		return node.ascii;
 	}
 
